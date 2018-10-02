@@ -28,5 +28,7 @@ export interface Comment {
 	updated_at: string;
 	html_url: string;
 	absolutePosition?: number;
+	canEdit: boolean;
+	canDelete: boolean;
 }
 
