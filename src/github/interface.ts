@@ -60,6 +60,9 @@ interface ILabel {
 // This interface is incomplete
 export interface IPullRequest {
 	additions: number;
+	allow_merge_commit: boolean;
+	allow_rebase_merge: boolean;
+	allow_squash_merge: boolean;
 	assignee: any;
 	assignees: any[];
 	author_association: string;

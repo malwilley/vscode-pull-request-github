@@ -22,6 +22,9 @@ export class PullRequestModel implements IPullRequestModel {
 	public updatedAt: string;
 	public localBranchName?: string;
 	public labels: string[];
+	public allowMergeCommit: boolean;
+	public allowRebaseMerge: boolean;
+	public allowSquashMerge: boolean;
 
 	public get isOpen(): boolean {
 		return this.state === PullRequestStateEnum.Open;
@@ -96,11 +99,14 @@ export class PullRequestModel implements IPullRequestModel {
 				htmlUrl: prItem.assignee.html_url
 			};
 		}
-
+		console.log(prItem);
 		this.createdAt = prItem.created_at;
 		this.updatedAt = prItem.updated_at ? prItem.updated_at : this.createdAt;
 		this.commentCount = prItem.comments;
 		this.commitCount = prItem.commits;
+		this.allowMergeCommit = prItem.allow_merge_commit;
+		this.allowRebaseMerge = prItem.allow_rebase_merge;
+		this.allowSquashMerge = prItem.allow_squash_merge;
 
 		this.head = new GitHubRef(prItem.head.ref, prItem.head.label, prItem.head.sha, prItem.head.repo.clone_url);
 		this.base = new GitHubRef(prItem.base.ref, prItem.base.label, prItem.base.sha, prItem.base.repo.clone_url);

@@ -40,6 +40,9 @@ interface PullRequest {
 	commitsCount: number;
 	repositoryDefaultBranch: any;
 	pendingCommentText?: string;
+	allowMergeCommit: boolean;
+	allowRebaseMerge: boolean;
+	allowSquashMerge: boolean;
 }
 
 let pullRequest: PullRequest;
@@ -103,7 +106,7 @@ function updatePullRequestState(state: PullRequestStateEnum): void {
 
 	const merge = (<HTMLButtonElement>document.getElementById(ElementIds.Merge));
 	if (merge) {
-		merge.disabled = state !== PullRequestStateEnum.Open;
+		merge.disabled = state !== PullRequestStateEnum.Open || !pullRequest.allowMergeCommit;
 	}
 
 	const close = (<HTMLButtonElement>document.getElementById(ElementIds.Close));

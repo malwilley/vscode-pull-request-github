@@ -104,6 +104,7 @@ export class GitHubRepository implements IGitHubRepository {
 
 			const hasMorePages = !!result.headers.link && result.headers.link.indexOf('rel="next"') > -1;
 			const pullRequests = result.data.map(item => {
+				console.log(item);
 				if (!item.head.repo) {
 					Logger.appendLine('GitHubRepository> The remote branch for this PR was already deleted.');
 					return null;
